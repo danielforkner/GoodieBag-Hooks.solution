@@ -29,11 +29,11 @@ const Root = () => {
           <p>What a nice home page for your goodies!</p>
         </main>
         <Routes>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/candies" component={AllCandies} />
-          <Route exact path="/candies/:id(\d+)" component={SingleCandy} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/candies" element={<AllCandies />} />
+          <Route exact path="/candies/:id(\d+)" element={<SingleCandy />} />
           {/* `(\d+)` in the above route is a regular expression to restrict the `id` param to only be numbers */}
-          <Route component={NotFound} />
+          <Route element={<NotFound />} />
           {/* this route without a path will render the NotFound component if no other Route match was found in the list above */}
         </Routes>
       </div>

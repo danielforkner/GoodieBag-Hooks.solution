@@ -20,7 +20,7 @@ const styles = {
 
 const Candy = (props) => {
   const { candy, classes } = props;
-
+  console.log('Candy props: ', props);
   return (
     <Link to={`/candies/${candy.id}`}>
       <Card className={classes.card}>
@@ -48,4 +48,5 @@ Candy.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default styled(Candy, styles);
+// export default styled(Candy, styles);
+export default Candy;
