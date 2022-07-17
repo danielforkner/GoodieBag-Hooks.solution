@@ -1,17 +1,10 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import AllCandies from './AllCandies';
 import SingleCandy from './SingleCandy';
 import NotFound from './NotFound';
+import { AppBar, Button, Toolbar } from '@mui/material';
 
 const Root = () => {
   return (
@@ -19,8 +12,16 @@ const Root = () => {
       <div>
         <AppBar position="static">
           <Toolbar>
-            <Button color="inherit"><Link className="navlink" to="/">Home</Link></Button>
-            <Button color="inherit"><Link className="navlink" to="/candies">Candies</Link></Button>
+            <Button color="inherit">
+              <Link className="navlink" to="/">
+                Home
+              </Link>
+            </Button>
+            <Button color="inherit">
+              <Link className="navlink" to="/candies">
+                Candies
+              </Link>
+            </Button>
           </Toolbar>
         </AppBar>
         <main>
@@ -37,7 +38,7 @@ const Root = () => {
         </Switch>
       </div>
     </Router>
-  )
-}
+  );
+};
 
 export default Root;

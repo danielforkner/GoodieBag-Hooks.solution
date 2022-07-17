@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography'
-import {connect} from 'react-redux';
-import {getSingleCandy, increaseQuantity, decreaseQuantity} from '../reducers'
+import { connect } from 'react-redux';
+import {
+  getSingleCandy,
+  increaseQuantity,
+  decreaseQuantity,
+} from '../reducers';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@mui/material';
+import { styled } from '@mui/system';
 
 const styles = {
   card: {
@@ -39,9 +45,9 @@ class SingleCandy extends React.Component {
   }
 
   render() {
-    const {candy, classes} = this.props;
-    const disabledIncrease = (candy.quantity === 10);
-    const disabledDecrease = (candy.quantity === 0);
+    const { candy, classes } = this.props;
+    const disabledIncrease = candy.quantity === 10;
+    const disabledDecrease = candy.quantity === 0;
     return (
       <div className="box-container">
         <Card className={classes.card}>
@@ -67,38 +73,50 @@ class SingleCandy extends React.Component {
             </CardContent>
           </div>
           <CardActions>
-            <Button size="small" color="primary" disabled={disabledDecrease} onClick={this.decrease}>
+            <Button
+              size="small"
+              color="primary"
+              disabled={disabledDecrease}
+              onClick={this.decrease}
+            >
               Decrease
             </Button>
-            <Button size="small" color="primary" disabled={disabledIncrease} onClick={this.increase}>
+            <Button
+              size="small"
+              color="primary"
+              disabled={disabledIncrease}
+              onClick={this.increase}
+            >
               Increase
             </Button>
           </CardActions>
         </Card>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
-  candy: state.singleCandy
+  candy: state.singleCandy,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getSingleCandy: (id) => dispatch(getSingleCandy(id)),
   increaseQuantity: (id) => dispatch(increaseQuantity(id)),
-  decreaseQuantity: (id) => dispatch(decreaseQuantity(id))
+  decreaseQuantity: (id) => dispatch(decreaseQuantity(id)),
 });
 
 SingleCandy.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SingleCandy));
+export default styled(
+  connect(mapStateToProps, mapDispatchToProps)(SingleCandy),
+  styles
+);
 
-
-
-{/* <div>
+{
+  /* <div>
         <div>
           <img src={imageUrl} />
           <p>{name}</p>
@@ -107,4 +125,5 @@ export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(S
         </div>
         <button type="button" disabled={disabledIncrease} onClick={this.increase}>Increase Quantity</button>
         <button type="button" disabled={disabledDecrease} onClick={this.decrease}>Decrease Quantity</button>
-      </div> */}
+      </div> */
+}
