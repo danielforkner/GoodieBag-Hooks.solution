@@ -31,7 +31,7 @@ const Root = () => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/candies" element={<AllCandies />} />
-          <Route exact path="/candies/:id(\d+)" element={<SingleCandy />} />
+          <Route exact path="/candies/:id" element={<SingleCandy />} />
           {/* `(\d+)` in the above route is a regular expression to restrict the `id` param to only be numbers */}
           <Route element={<NotFound />} />
           {/* this route without a path will render the NotFound component if no other Route match was found in the list above */}

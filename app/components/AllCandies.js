@@ -16,14 +16,14 @@ const AllCandies = () => {
 
   return (
     <div>
-      <h1>All Candies Component</h1>
-      {candies.map((candy) => (
-        <div className="card" key={candy.id}>
-          {candy.name}
-          <Candy candy={candy} />
-        </div>
-      ))}
-      <Candy />
+      <h2 className="section-title">All Candies Component</h2>
+      <ul className="container">
+        {candies.map((candy) => (
+          <div className="card" key={candy.id}>
+            <Candy candy={candy} />
+          </div>
+        ))}
+      </ul>
     </div>
   );
 };

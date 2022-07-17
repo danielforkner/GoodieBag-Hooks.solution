@@ -24,26 +24,31 @@ const updatedQuantity = (candy) => ({
 
 // THUNK CREATORS
 export const getAllCandies = createAsyncThunk(GOT_ALL_CANDIES, async () => {
-  console.log('GETTING ALL CANDIES');
   const { data } = await axios.get('/api/candies');
-  console.log('data', data);
   return data;
 });
 
-export const getSingleCandy = (id) => async (dispatch) => {
+export const getSingleCandy = createAsyncThunk(GOT_SINGLE_CANDY, async (id) => {
   const { data } = await axios.get(`/api/candies/${id}`);
-  dispatch(gotSingleCandy(data));
-};
+  return data;
+});
 
-export const increaseQuantity = (id) => async (dispatch) => {
-  const { data } = await axios.put(`/api/candies/${id}/increase`);
-  dispatch(updatedQuantity(data));
-};
+export const increaseQuantity = createAsyncThunk(
+  'increased_quantity',
+  async (id) => {
+    console.log('increasing');
+    const { data } = await axios.put(`/api/candies/${id}/increase`);
+    return data;
+  }
+);
 
-export const decreaseQuantity = (id) => async (dispatch) => {
-  const { data } = await axios.put(`/api/candies/${id}/decrease`);
-  dispatch(updatedQuantity(data));
-};
+export const decreaseQuantity = createAsyncThunk(
+  'decreased_quantity',
+  async (id) => {
+    const { data } = await axios.put(`/api/candies/${id}/decrease`);
+    return data;
+  }
+);
 
 // REDUCER
 const initialState = {
@@ -52,24 +57,24 @@ const initialState = {
   status: 'idle',
 };
 
-const candyReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GOT_ALL_CANDIES:
-      console.log('got all candies');
-      return { ...state, allCandies: action.candies };
-    case GOT_SINGLE_CANDY:
-      return { ...state, singleCandy: action.candy };
-    case UPDATED_QUANTITY:
-      return { ...state, singleCandy: action.candy };
-    default:
-      return state;
-  }
-};
+// const candyReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case GOT_ALL_CANDIES:
+//       console.log('got all candies');
+//       return { ...state, allCandies: action.candies };
+//     case GOT_SINGLE_CANDY:
+//       return { ...state, singleCandy: action.candy };
+//     case UPDATED_QUANTITY:
+//       return { ...state, singleCandy: action.candy };
+//     default:
+//       return state;
+//   }
+// };
 
 export const candySlice = createSlice({
   name: 'candies',
   initialState,
-  reducers: { candyReducer },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(getAllCandies.pending, (state) => {
@@ -77,7 +82,20 @@ export const candySlice = createSlice({
       })
       .addCase(getAllCandies.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.allCandies = state.allCandies.concat(action.payload);
+        state.allCandies = action.payload;
+      })
+      .addCase(getAllCandies.rejected, (state) => {
+        state.status = 'failed';
+        console.error('failed to get candies');
+      })
+      .addCase(getSingleCandy.fulfilled, (state, action) => {
+        state.singleCandy = action.payload;
+      })
+      .addCase(increaseQuantity.fulfilled, (state, action) => {
+        state.singleCandy = action.payload;
+      })
+      .addCase(decreaseQuantity.fulfilled, (state, action) => {
+        state.singleCandy = action.payload;
       });
   },
 });

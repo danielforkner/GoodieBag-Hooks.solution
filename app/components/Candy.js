@@ -18,15 +18,38 @@ const styles = {
   },
 };
 
-const Candy = () => {
-  return <h2>Candy Component</h2>;
+const Candy = ({ candy, classes }) => {
+  return (
+    <Link to={`/candies/${candy.id}`}>
+      <Card>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt={`${candy.name} candy image`}
+            // className={classes.media}
+            height="140"
+            image={candy.imageUrl}
+            title={`${candy.name} candy image`}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {candy.name}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Link>
+  );
+};
+
+Candy.propTypes = {
+  classes: PropTypes.object.isRequired,
 };
 
 export default Candy;
 
 // const Candy = (props) => {
 //   const { candy, classes } = props;
-//   console.log('Candy props: ', props);
 //   return (
 //     <Link to={`/candies/${candy.id}`}>
 //       <Card className={classes.card}>

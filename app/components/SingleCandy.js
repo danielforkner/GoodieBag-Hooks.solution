@@ -1,6 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import {
   getSingleCandy,
   increaseQuantity,
@@ -15,6 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/system';
+import { useParams } from 'react-router-dom';
 
 const styles = {
   card: {
@@ -25,11 +25,70 @@ const styles = {
   },
 };
 
-const SingleCandy = () => {
-  return <h1>Single Candy</h1>;
+const SingleCandy = ({ candy }) => {
+  console.log('props.candy: ', candy);
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const disabledIncrease = candy.quantity === 10;
+  const disabledDecrease = candy.quantity === 0;
+
+  useEffect(() => {
+    dispatch(getSingleCandy(params.id));
+  }, [dispatch]);
+
+  return (
+    <div className="box-container">
+      <Card>
+        <CardMedia
+          component="img"
+          alt={`${candy.name} candy image`}
+          // className={classes.media}
+          height="300"
+          image={candy.imageUrl}
+          title={`${candy.name} candy image`}
+        />
+        <div>
+          <CardContent>
+            <Typography component="h5" variant="h5">
+              {candy.name}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              {candy.description}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              Quantity: {candy.quantity}
+            </Typography>
+          </CardContent>
+        </div>
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            // disabled={disabledDecrease}
+            onClick={() => decreaseQuantity(candy.id)}
+          >
+            Decrease
+          </Button>
+          <Button
+            size="small"
+            color="primary"
+            disabled={disabledIncrease}
+            onClick={decreaseQuantity}
+          >
+            Increase
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
+  );
 };
 
-export default SingleCandy;
+const mapStateToProps = (state) => ({
+  candy: state.singleCandy,
+});
+
+export default connect(mapStateToProps)(SingleCandy);
 
 // class SingleCandy extends React.Component {
 //   constructor(props) {
