@@ -1,42 +1,23 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// ACTION TYPES
-const GOT_ALL_CANDIES = 'GOT_ALL_CANDIES_SUCCESSFULLY';
-const GOT_SINGLE_CANDY = 'GOT_SINGLE_CANDY';
-const UPDATED_QUANTITY = 'UPDATED_QUANTITY';
-
-// ACTION CREATORS
-const gotAllCandies = (candies) => ({
-  type: GOT_ALL_CANDIES,
-  candies,
-});
-
-const gotSingleCandy = (candy) => ({
-  type: GOT_SINGLE_CANDY,
-  candy,
-});
-
-const updatedQuantity = (candy) => ({
-  type: UPDATED_QUANTITY,
-  candy,
-});
-
 // THUNK CREATORS
-export const getAllCandies = createAsyncThunk(GOT_ALL_CANDIES, async () => {
+export const getAllCandies = createAsyncThunk('get candies', async () => {
   const { data } = await axios.get('/api/candies');
   return data;
 });
 
-export const getSingleCandy = createAsyncThunk(GOT_SINGLE_CANDY, async (id) => {
-  const { data } = await axios.get(`/api/candies/${id}`);
-  return data;
-});
+export const getSingleCandy = createAsyncThunk(
+  'get single candy',
+  async (id) => {
+    const { data } = await axios.get(`/api/candies/${id}`);
+    return data;
+  }
+);
 
 export const increaseQuantity = createAsyncThunk(
   'increased_quantity',
   async (id) => {
-    console.log('increasing');
     const { data } = await axios.put(`/api/candies/${id}/increase`);
     return data;
   }
@@ -56,20 +37,6 @@ const initialState = {
   singleCandy: {},
   status: 'idle',
 };
-
-// const candyReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case GOT_ALL_CANDIES:
-//       console.log('got all candies');
-//       return { ...state, allCandies: action.candies };
-//     case GOT_SINGLE_CANDY:
-//       return { ...state, singleCandy: action.candy };
-//     case UPDATED_QUANTITY:
-//       return { ...state, singleCandy: action.candy };
-//     default:
-//       return state;
-//   }
-// };
 
 export const candySlice = createSlice({
   name: 'candies',

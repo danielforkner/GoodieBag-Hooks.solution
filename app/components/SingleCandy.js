@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import {
   getSingleCandy,
   increaseQuantity,
@@ -25,8 +25,9 @@ const styles = {
   },
 };
 
-const SingleCandy = ({ candy }) => {
-  console.log('props.candy: ', candy);
+const SingleCandy = (props) => {
+  console.log('props: ', props);
+  const candy = useSelector((state) => state.singleCandy);
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -65,8 +66,8 @@ const SingleCandy = ({ candy }) => {
           <Button
             size="small"
             color="primary"
-            // disabled={disabledDecrease}
-            onClick={() => decreaseQuantity(candy.id)}
+            disabled={disabledDecrease}
+            onClick={() => dispatch(decreaseQuantity(candy.id))}
           >
             Decrease
           </Button>
@@ -74,7 +75,7 @@ const SingleCandy = ({ candy }) => {
             size="small"
             color="primary"
             disabled={disabledIncrease}
-            onClick={decreaseQuantity}
+            onClick={() => dispatch(increaseQuantity(candy.id))}
           >
             Increase
           </Button>
@@ -84,11 +85,9 @@ const SingleCandy = ({ candy }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  candy: state.singleCandy,
-});
+export default SingleCandy;
 
-export default connect(mapStateToProps)(SingleCandy);
+// export default connect(mapStateToProps)(SingleCandy);
 
 // class SingleCandy extends React.Component {
 //   constructor(props) {
