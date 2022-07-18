@@ -16,7 +16,14 @@ const AllCandies = () => {
 
   return (
     <div>
-      <h2 className="section-title">All Candies Component</h2>
+      <h2 className="section-title">
+        Candies
+        {candyStatus === 'loading'
+          ? ': LOADING'
+          : candyStatus === 'failed'
+          ? ': failed to load'
+          : null}
+      </h2>
       <ul className="container">
         {candies.map((candy) => (
           <div className="card" key={candy.id}>
