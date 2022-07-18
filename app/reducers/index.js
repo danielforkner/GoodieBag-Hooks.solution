@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // THUNK CREATORS
-export const getAllCandies = createAsyncThunk('get candies', async () => {
+export const getAllCandies = createAsyncThunk('candies/getAll', async () => {
   const { data } = await axios.get('/api/candies');
   return data;
 });
 
 export const getSingleCandy = createAsyncThunk(
-  'get single candy',
+  'candies/getSingleCandy',
   async (id) => {
     const { data } = await axios.get(`/api/candies/${id}`);
     return data;
@@ -16,7 +16,7 @@ export const getSingleCandy = createAsyncThunk(
 );
 
 export const increaseQuantity = createAsyncThunk(
-  'increased_quantity',
+  'candies/increment',
   async (id) => {
     const { data } = await axios.put(`/api/candies/${id}/increase`);
     return data;
@@ -24,7 +24,7 @@ export const increaseQuantity = createAsyncThunk(
 );
 
 export const decreaseQuantity = createAsyncThunk(
-  'decreased_quantity',
+  'candies/decrement',
   async (id) => {
     const { data } = await axios.put(`/api/candies/${id}/decrease`);
     return data;
