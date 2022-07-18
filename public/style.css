@@ -75,6 +75,10 @@ main, .section-title {
   box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
+.candy-card {
+  max-width: 500,
+}
+
 /* ----- START CAROUSEL ----- */
 .carousel-wrapper{
   height:400px;

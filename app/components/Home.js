@@ -22,7 +22,7 @@ const Home = () => {
         <a className="arrow arrow-next" href="#item-1" />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Home;

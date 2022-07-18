@@ -1,35 +1,31 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {getAllCandies} from '../reducers';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCandies } from '../reducers';
 import Candy from './Candy';
 
-class AllCandies extends React.Component {
-  componentDidMount() {
-    this.props.getAllCandies();
-  }
+const AllCandies = () => {
+  const dispatch = useDispatch();
+  const candies = useSelector((state) => state.allCandies);
+  const candyStatus = useSelector((state) => state.status);
 
-  render() {
-    return (
-      <div>
-        <h2 className="section-title">Candies</h2>
-        <ul className="container">
-          {this.props.candies.map(candy => (
-            <div className="card" key={candy.id}>
-              <Candy candy={candy} />
-            </div>
-          ))}
-        </ul>
-      </div>
-    )
-  }
-}
+  useEffect(() => {
+    if (candyStatus === 'idle') {
+      dispatch(getAllCandies());
+    }
+  }, [candyStatus, dispatch]);
 
-const mapStateToProps = (state) => ({
-  candies: state.allCandies
-});
+  return (
+    <div>
+      <h2 className="section-title">All Candies Component</h2>
+      <ul className="container">
+        {candies.map((candy) => (
+          <div className="card" key={candy.id}>
+            <Candy candy={candy} />
+          </div>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  getAllCandies: () => dispatch(getAllCandies())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AllCandies);
+export default AllCandies;
