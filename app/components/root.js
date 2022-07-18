@@ -32,7 +32,7 @@ const Root = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/candies" element={<AllCandies />} />
           <Route exact path="/candies/:id" element={<SingleCandy />} />
-          <Route element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
           {/* this route without a path will render the NotFound component if no other Route match was found in the list above */}
         </Routes>
       </div>
