@@ -8,25 +8,15 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
-import { styled } from '@mui/system';
-const styles = {
-  card: {
-    maxWidth: 500,
-  },
-  media: {
-    objectFit: 'cover',
-  },
-};
 
-const Candy = ({ candy, classes }) => {
+const Candy = ({ candy }) => {
   return (
     <Link to={`/candies/${candy.id}`}>
-      <Card>
+      <Card className="candy-card">
         <CardActionArea>
           <CardMedia
             component="img"
             alt={`${candy.name} candy image`}
-            // className={classes.media}
             height="140"
             image={candy.imageUrl}
             title={`${candy.name} candy image`}
@@ -42,39 +32,4 @@ const Candy = ({ candy, classes }) => {
   );
 };
 
-Candy.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
 export default Candy;
-
-// const Candy = (props) => {
-//   const { candy, classes } = props;
-//   return (
-//     <Link to={`/candies/${candy.id}`}>
-//       <Card className={classes.card}>
-//         <CardActionArea>
-//           <CardMedia
-//             component="img"
-//             alt={`${candy.name} candy image`}
-//             className={classes.media}
-//             height="140"
-//             image={candy.imageUrl}
-//             title={`${candy.name} candy image`}
-//           />
-//           <CardContent>
-//             <Typography gutterBottom variant="h5" component="h2">
-//               {candy.name}
-//             </Typography>
-//           </CardContent>
-//         </CardActionArea>
-//       </Card>
-//     </Link>
-//   );
-// };
-
-// Candy.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-// export default styled(Candy, styles);
