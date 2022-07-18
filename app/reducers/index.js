@@ -31,7 +31,7 @@ export const decreaseQuantity = createAsyncThunk(
   }
 );
 
-// REDUCER
+// SLICE
 const initialState = {
   allCandies: [],
   singleCandy: {},

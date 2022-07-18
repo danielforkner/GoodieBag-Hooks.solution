@@ -9,7 +9,7 @@ const AllCandies = () => {
   const candyStatus = useSelector((state) => state.status);
 
   useEffect(() => {
-    if (candyStatus === 'idle') {
+    if (candyStatus !== 'succeeded') {
       dispatch(getAllCandies());
     }
   }, [candyStatus, dispatch]);
