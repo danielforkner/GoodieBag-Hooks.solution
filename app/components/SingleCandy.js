@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
-const SingleCandy = (props) => {
+const SingleCandy = () => {
   const candy = useSelector((state) => state.singleCandy);
   const dispatch = useDispatch();
   const params = useParams();
