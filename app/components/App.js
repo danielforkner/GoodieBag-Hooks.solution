@@ -6,7 +6,7 @@ import SingleCandy from './SingleCandy';
 import NotFound from './NotFound';
 import { AppBar, Button, Toolbar } from '@mui/material';
 
-const Root = () => {
+const App = () => {
   return (
     <Router>
       <div>
@@ -40,4 +40,4 @@ const Root = () => {
   );
 };
 
-export default Root;
+export default App;
