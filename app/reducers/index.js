@@ -72,38 +72,17 @@ export const candySlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
-      .addCase(getSingleCandy.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(getSingleCandy.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.singleCandy = action.payload;
-      })
-      .addCase(getSingleCandy.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      })
-      .addCase(increaseQuantity.pending, (state) => {
-        state.status = 'loading';
       })
       .addCase(increaseQuantity.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.singleCandy = action.payload;
       })
-      .addCase(increaseQuantity.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      })
-      .addCase(decreaseQuantity.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(decreaseQuantity.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.singleCandy = action.payload;
-      })
-      .addCase(decreaseQuantity.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
       });
   },
 });
