@@ -14,6 +14,7 @@ The requirements below are broken into step-by-step instructions, which model th
 - [ ] Write a route to serve up all candies
 
 #### Frontend
+
 - [ ] Write a candies sub-reducer to manage candies in your Redux store
 - [ ] Write a component to display a list of all candies
 - [ ] Display the all-candies component when the url matches `/candies`
@@ -30,5 +31,8 @@ If you finish the above 'get all candies' functionality, feel free to branch out
   - Clicking on a candy in the all-candies view will navigate to that candy's single view
 - Update candy quantity
   - The single candy view has 2 buttons, to increase or decrease that candy's quantity
+- Error Handling and Loading States
+  - Redux Toolkit's Thunks dispatch actions from promise lifecycles, meaning you can write case reducers to update state based on a pending, rejected, or fulfilled promise.
+  - Can you think of a way to incorporate this into your code? (For example: when loading something from the server, a loading bar could display until the server response is received)
 - Go wild on the UI!
   - Try out some UI libraries like Material, Bootstrap, or Semantic... to name a few
