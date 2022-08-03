@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCandies } from '../reducers';
 import Candy from './Candy';
+import { v4 as uuidv4 } from 'uuid';
 
 const AllCandies = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const AllCandies = () => {
       </h2>
       <ul className="container">
         {candies.map((candy) => (
-          <div className="card" key={candy.id}>
+          <div className="card" key={uuidv4()}>
             <Candy candy={candy} />
           </div>
         ))}
